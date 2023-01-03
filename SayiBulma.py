@@ -3,6 +3,7 @@ hane = 3
 minHane = 100
 maxHane = 1000
 
+
 def SetMinMaxHane():
     global hane
     global minHane
@@ -34,6 +35,7 @@ def HaneSayiAl():
             return h
         else:
             print("3-5 arası hane sayısı belirtiniz!")
+
 
 def RastgeleBenzersizSayi():  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
     global minHane
@@ -96,10 +98,10 @@ print('1. Oyna')
 print('2. Cık')
 
 print('Oynamak ister misin?')
-textInput = int(input())
+textInput = str(input())
 
 while textInput != 2:
-    if (textInput == 1):
+    if textInput == 1:
         print("SAYI BULMA OYUNU")
         hane = HaneSayiAl()
         kazanskor = "+" + str(hane)
@@ -121,5 +123,9 @@ while textInput != 2:
                 print('2. Cık')
                 textInput = int(input())
 
-    elif (textInput == 2):
+    elif textInput == 2:
         print("Teşekkürler")
+
+    else:
+        print("nE?")
+        break
