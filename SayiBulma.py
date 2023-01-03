@@ -91,18 +91,35 @@ def TahminAl():
 
 
 # ANA PROGRAM BURADAN BAŞLIYOR
-print("SAYI BULMA OYUNU")
-hane = HaneSayiAl()
-kazanskor = "+" + str(hane)
-SetMinMaxHane()
-print(str(hane) + " haneli bir sayı tuttum. Bil bakalım.")
-sayi = RastgeleBenzersizSayi()
+print("sayi bulma oyununa hoş geldiniz")
+print('1. Oyna')
+print('2. Cık')
 
-sonuc = ""
+print('Oynamak ister misin?')
+textInput = int(input())
 
-while sonuc != kazanskor:
-    tahmin = TahminAl()
-    sonuc = Karsilastir(tahmin, sayi)
-    print(sonuc)
-    if sonuc == kazanskor:
-        print("TEBRİKLER BİLDİNİZ.")
+while textInput != 2:
+    if (textInput == 1):
+        print("SAYI BULMA OYUNU")
+        hane = HaneSayiAl()
+        kazanskor = "+" + str(hane)
+        SetMinMaxHane()
+        print(str(hane) + " haneli bir sayı tuttum. Bil bakalım.")
+        sayi = RastgeleBenzersizSayi()
+
+        sonuc = ""
+
+        while sonuc != kazanskor:
+            tahmin = TahminAl()
+            sonuc = Karsilastir(tahmin, sayi)
+            print(sonuc)
+            if sonuc == kazanskor:
+                print("TEBRİKLER BİLDİNİZ.")
+                print("")
+                print('Oynamak ister misin?')
+                print('1. Oyna')
+                print('2. Cık')
+                textInput = int(input())
+
+    elif (textInput == 2):
+        print("Teşekkürler")
