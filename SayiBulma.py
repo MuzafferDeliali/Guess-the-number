@@ -1,4 +1,15 @@
 import random
+hane = 3
+minHane = 100
+maxHane = 1000
+
+def SetMinMaxHane():
+    global hane
+    global minHane
+    global maxHane
+
+    minHane = 10 ** (hane - 1)
+    maxHane = (minHane * 10) - 1
 
 
 def Benzersiz(x):  # Bir tam sayının rakamları benzersiz ise True, değilse False döndürür.
@@ -10,24 +21,27 @@ def Benzersiz(x):  # Bir tam sayının rakamları benzersiz ise True, değilse F
                 return False
     return True
 
+
 def HaneSayiAl():
+
     while True:
         try:
-            hane = int(input("Hane: "))
+            h = int(input("Hane: "))
         except:
-            hane = 0
+            h = 0
 
-        if 0 < hane < 6:
-            return hane
+        if 3 <= h <= 5:
+            return h
         else:
-            print("0-6 arası hane sayısı belirt!")
+            print("3-5 arası hane sayısı belirtiniz!")
 
-def RastgeleBenzersizSayi(hane):  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
+def RastgeleBenzersizSayi():  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
+    global minHane
+    global maxHane
+
     b = False
     r = 0
     while not b:
-        minHane = 10 ** (hane - 1)
-        maxHane = (minHane * 10) - 1
         r = random.randrange(minHane, maxHane)
         b = Benzersiz(r)
     return r
@@ -60,6 +74,9 @@ def Karsilastir(sayi1, sayi2):
 
 
 def TahminAl():
+    global hane
+    global minHane
+    global maxHane
     while True:
         try:
             tahmin = int(input("Tahmin:"))
@@ -70,18 +87,22 @@ def TahminAl():
         if b and minHane < tahmin < maxHane:
             return tahmin
         else:
-            print("3 haneli rakamları benzersiz bir tahminde bulunun!")
+            print(str(hane) + " haneli rakamları benzersiz bir tahminde bulunun!")
 
 
 # ANA PROGRAM BURADAN BAŞLIYOR
 print("SAYI BULMA OYUNU")
-print("3 haneli bir sayı tuttum. Bil bakalım.")
-sayi = RastgeleBenzersizSayi(HaneSayiAl())
+hane = HaneSayiAl()
+kazanskor = "+" + str(hane)
+SetMinMaxHane()
+print(str(hane) + " haneli bir sayı tuttum. Bil bakalım.")
+sayi = RastgeleBenzersizSayi()
 
 sonuc = ""
-while sonuc != "+3":
+
+while sonuc != kazanskor:
     tahmin = TahminAl()
     sonuc = Karsilastir(tahmin, sayi)
     print(sonuc)
-    if sonuc == "+3":
+    if sonuc == kazanskor:
         print("TEBRİKLER BİLDİNİZ.")
