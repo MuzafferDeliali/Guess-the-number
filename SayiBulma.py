@@ -1,21 +1,37 @@
 import random
 
-def Benzersiz(x): # Bir tamsayının rakamları benzersiz ise True, değilse False döndürür.
-    s = str(x) # sayının string karşılığı
-    n = len(s) # sayının karakter uzunluğu (hane sayısı)
+
+def Benzersiz(x):  # Bir tam sayının rakamları benzersiz ise True, değilse False döndürür.
+    s = str(x)  # Sayının string karşılığı
+    n = len(s)  # Sayının karakter uzunluğu (hane sayısı)
     for i in range(n-1):
         for j in range(i+1, n):
             if s[i] == s[j]:
                 return False
     return True
 
-def RastgeleBenzersizSayi(): # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
+def HaneSayiAl():
+    while True:
+        try:
+            hane = int(input("Hane: "))
+        except:
+            hane = 0
+
+        if 0 < hane < 6:
+            return hane
+        else:
+            print("0-6 arası hane sayısı belirt!")
+
+def RastgeleBenzersizSayi(hane):  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
     b = False
     r = 0
-    while(b == False):
-        r = random.randrange(100, 999)
+    while not b:
+        minHane = 10 ** (hane - 1)
+        maxHane = (minHane * 10) - 1
+        r = random.randrange(minHane, maxHane)
         b = Benzersiz(r)
     return r
+
 
 def Karsilastir(sayi1, sayi2):
     s1 = str(sayi1)
@@ -42,26 +58,28 @@ def Karsilastir(sayi1, sayi2):
 
         return sonuc
 
+
 def TahminAl():
-    while(True):
+    while True:
         try:
             tahmin = int(input("Tahmin:"))
         except:
             tahmin = 0
 
         b = Benzersiz(tahmin)
-        if b and tahmin > 100 and tahmin < 1000:
+        if b and minHane < tahmin < maxHane:
             return tahmin
         else:
             print("3 haneli rakamları benzersiz bir tahminde bulunun!")
 
+
 # ANA PROGRAM BURADAN BAŞLIYOR
 print("SAYI BULMA OYUNU")
 print("3 haneli bir sayı tuttum. Bil bakalım.")
-sayi = RastgeleBenzersizSayi()
+sayi = RastgeleBenzersizSayi(HaneSayiAl())
 
-sonuc=""
-while(sonuc != "+3"):
+sonuc = ""
+while sonuc != "+3":
     tahmin = TahminAl()
     sonuc = Karsilastir(tahmin, sayi)
     print(sonuc)
