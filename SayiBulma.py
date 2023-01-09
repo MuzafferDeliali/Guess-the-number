@@ -24,7 +24,6 @@ def Benzersiz(x):  # Bir tam sayının rakamları benzersiz ise True, değilse F
 
 
 def HaneSayiAl():
-
     while True:
         try:
             h = int(input("Hane: "))
@@ -92,40 +91,41 @@ def TahminAl():
             print(str(hane) + " haneli rakamları benzersiz bir tahminde bulunun!")
 
 
+def DevamOnayiAl():
+    while True:
+        cevap = input("Tekrar oynamak ister misiniz(E/H) ? ")
+        if cevap == "E" or cevap == "e":
+            return True
+        elif cevap == "H" or cevap == "h":
+            return False
+        else:
+            print("Cevap anlaşılamadı. E veya H olarak cevaplayın.")
+
+
+def OyunOyna():
+    global hane
+
+    hane = HaneSayiAl()
+    kazanskor = "+" + str(hane)
+    print(kazanskor)
+    SetMinMaxHane()
+    print(str(hane) + " haneli bir sayı tuttum. Bil bakalım.")
+    sayi = RastgeleBenzersizSayi()
+
+    sonuc = ""
+
+    while sonuc != kazanskor:
+        tahmin = TahminAl()
+        sonuc = Karsilastir(tahmin, sayi)
+        print(sonuc)
+        if sonuc == kazanskor:
+            print("TEBRİKLER BİLDİNİZ.")
+
+
 # ANA PROGRAM BURADAN BAŞLIYOR
-print("Sayi bulma oyununa hoş geldiniz")
-print('1. Oyna')
-print('2. Cık')
-
-print('Oynamak ister misin?')
-textInput = str(input())
-
-while textInput != 2:
-    if textInput == 1:
-        print("SAYI BULMA OYUNU")
-        hane = HaneSayiAl()
-        kazanskor = "+" + str(hane)
-        SetMinMaxHane()
-        print(str(hane) + " haneli bir sayı tuttum. Bil bakalım.")
-        sayi = RastgeleBenzersizSayi()
-
-        sonuc = ""
-
-        while sonuc != kazanskor:
-            tahmin = TahminAl()
-            sonuc = Karsilastir(tahmin, sayi)
-            print(sonuc)
-            if sonuc == kazanskor:
-                print("TEBRİKLER BİLDİNİZ.")
-                print("")
-                print('Oynamak ister misin?')
-                print('1. Oyna')
-                print('2. Cık')
-                textInput = int(input())
-
-    elif textInput == 2:
-        print("Teşekkürler")
-
-    else:
-        print("nE?")
-        break
+print("SAYI BULMA OYUNU")
+tekraroyna = True
+while tekraroyna:
+    OyunOyna()
+    tekraroyna = DevamOnayiAl()
+print("Bizimle oynadığınız için teşekkür ederiz.")
