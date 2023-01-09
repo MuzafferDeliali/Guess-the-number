@@ -93,7 +93,7 @@ def TahminAl():
 
 
 # ANA PROGRAM BURADAN BAŞLIYOR
-print("sayi bulma oyununa hoş geldiniz")
+print("Sayi bulma oyununa hoş geldiniz")
 print('1. Oyna')
 print('2. Cık')
 
