@@ -1,8 +1,12 @@
 import random
+import numpy as np
 hane = 3
 minHane = 100
 maxHane = 1000
-ihtimal = [[0, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]]
+
+ihtimal = np.full((10, 3), 1, dtype=int)
+ihtimal[0][0] = 0
+denenler = []
 
 
 def ConvInt(val, d):
@@ -200,6 +204,8 @@ def OyunOyna():
         SonucIslem(tahmin, sonuc)
         if sonuc == kazanskor:
             print("TUTTUĞUN SAYIYI BİLDİM.")
+        else:
+            denenler.append(tahmin)
 
 
 # ANA PROGRAM BURADAN BAŞLIYOR
