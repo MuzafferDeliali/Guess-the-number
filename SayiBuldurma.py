@@ -7,6 +7,11 @@ maxHane = 1000
 ihtimal = np.full((10, 3), 1, dtype=int)
 ihtimal[0][0] = 0
 denenler = []
+# d_sayilar = []  # +2-1 vb yanıtlarda eldeki sayılar ile deneyecek
+
+
+def Denendi():
+    denenler.append(tahmin)
 
 
 def ConvInt(val, d):
@@ -162,7 +167,8 @@ def TahminYap():
             s_tahmin = s_tahmin + str(rlist[ind])
         tahmin = int(s_tahmin)
         if Benzersiz(tahmin):
-            return tahmin
+            if tahmin not in denenler:
+                return tahmin
 
 
 def SonucAl():
@@ -216,3 +222,5 @@ while tekraroyna:
     OyunOyna()
     tekraroyna = DevamOnayiAl()
 print("Bizimle oynadığınız için teşekkür ederiz.")
+print(denenler)
+# print(d_sayilar)
