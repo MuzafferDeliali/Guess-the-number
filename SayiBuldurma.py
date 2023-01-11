@@ -6,7 +6,7 @@ maxHane = 1000
 
 ihtimal = np.full((10, 3), 1, dtype=int)
 ihtimal[0][0] = 0
-tahminler = []
+tahminler = np.empty((1, 3), int)
 # d_sayilar = []  # +2-1 vb yanıtlarda eldeki sayılar ile deneyecek
 
 
@@ -26,9 +26,7 @@ def ResetIhtimal():
 
 
 def SetMinMaxHane():
-    global hane
-    global minHane
-    global maxHane
+    global hane, minHane, maxHane
 
     minHane = 10 ** (hane - 1)
     maxHane = (minHane * 10) - 1
@@ -54,8 +52,7 @@ def HaneSayiAl():
 
 
 def RastgeleBenzersizSayi():  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
-    global minHane
-    global maxHane
+    global minHane, maxHane
 
     b = False
     r = 0
@@ -143,7 +140,7 @@ def GetSifirIhtimalAdet(tahmin):
     s_tahmin = str(tahmin)
     for c in range(len(s_tahmin)):
         r = int(s_tahmin[c])
-        if ihtimal[r] == [0] * hane:
+        if np.all((ihtimal[r] == [0] * hane)):
             adet = adet + 1
     return adet
 
@@ -159,17 +156,15 @@ def GecmisIslem():
                 for c in range(len(s_tahmin)):
                     r = int(s_tahmin[c])
                     if ihtimal[r][c] > 0:
-                        for r2 in range(10):
-                            ihtimal[r2][c] = 0
+                        ihtimal[:, c] = 0
                         ihtimal[r][c] = 2
 
 
 def SonucIslem(tahmin, sonuc):
-    global hane
-    global ihtimal
+    global hane, ihtimal, tahminler
     arti = GetArti(sonuc)
     eksi = GetEksi(sonuc)
-    tahminler.append([tahmin, arti, eksi])
+    tahminler = np.append(tahminler, np.array([[tahmin, arti, eksi]]), axis=0)
     s_tahmin = str(tahmin)
     for c in range(len(s_tahmin)):
         r = int(s_tahmin[c])
