@@ -6,12 +6,8 @@ maxHane = 1000
 
 ihtimal = np.full((10, 3), 1, dtype=int)
 ihtimal[0][0] = 0
-denenler = []
+tahminler = []
 # d_sayilar = []  # +2-1 vb yanıtlarda eldeki sayılar ile deneyecek
-
-
-def Denendi():
-    denenler.append(tahmin)
 
 
 def ConvInt(val, d):
@@ -124,33 +120,70 @@ def SonucDogrulama(sonuc):
         return True
 
 
+def GetArti(sonuc):
+    if sonuc[0] == "-" or sonuc[0] == "0":
+        return 0
+    else:
+        return ConvInt(sonuc[1], 0)
+
+
+def GetEksi(sonuc):
+    if sonuc[0] == "-":
+        return ConvInt(sonuc[1], 0)
+    else:
+        if len(sonuc) == 4:
+            return ConvInt(sonuc[1], 0)
+        else:
+            return 0
+
+
+def GetSifirIhtimalAdet(tahmin):
+    global ihtimal
+    adet = 0
+    s_tahmin = str(tahmin)
+    for c in range(len(s_tahmin)):
+        r = int(s_tahmin[c])
+        if ihtimal[r] == [0] * hane:
+            adet = adet + 1
+    return adet
+
+
+def GecmisIslem():
+    global hane
+    for i in range(len(tahminler)):
+        if tahminler[i][1] > 0 and tahminler[i][2] == 0:  # Sonucu sadece artı olan tahmin ise
+            tahmin = tahminler[i][0]
+            sifir = GetSifirIhtimalAdet(tahmin)
+            if sifir + tahminler[i][1] == hane:  # Sıfırlar ve artıların toplamı hane kadar ise artıların yeri kesindir.
+                s_tahmin = str(tahmin)
+                for c in range(len(s_tahmin)):
+                    r = int(s_tahmin[c])
+                    if ihtimal[r][c] > 0:
+                        for r2 in range(10):
+                            ihtimal[r2][c] = 0
+                        ihtimal[r][c] = 2
+
+
 def SonucIslem(tahmin, sonuc):
     global hane
     global ihtimal
-
+    arti = GetArti(sonuc)
+    eksi = GetEksi(sonuc)
+    tahminler.append([tahmin, arti, eksi])
     s_tahmin = str(tahmin)
-    if sonuc == "0":  # Hiçbir rakam tutmadı
-        for i in range(len(s_tahmin)):
-            r = int(s_tahmin[i])
-            for c in range(hane):
-                ihtimal[r][c] = 0
-    elif sonuc[0] == "-":
-        for c in range(len(s_tahmin)):
-            r = int(s_tahmin[c])
+    for c in range(len(s_tahmin)):
+        r = int(s_tahmin[c])
+        if arti == 0 and eksi == 0:  # Hiçbir rakam tutmadı
+            ihtimal[r] = [0] * hane
+        elif arti == 0:  # Tutan rakamların hiçbiri yerinde değil (Sadece Eksi)
             ihtimal[r][c] = 0
-    elif sonuc[0] == "+" and len(sonuc) == 2:
-        for c in range(len(s_tahmin)):
-            r = int(s_tahmin[c])
-            if ihtimal[r][c] != 0:
-                ihtimal[r][c] = ihtimal[r][c] + 1
-    elif sonuc[0] == "+" and len(sonuc) == 4:
-        d1 = ConvInt(sonuc[1], 0)
-        d2 = ConvInt(sonuc[1], 0)
-        if d1 + d2 == hane:
-            for r in range(10):
-                if s_tahmin.index(str(r)) == -1:
-                    for c in range(hane):
-                        ihtimal[r][c] = 0
+
+    if arti + eksi == hane:  # arti ve eksi toplami haneye eşit (tahmin dışındaki rakamları sıfırla)
+        for r in range(10):
+            if s_tahmin.find(str(r)) == - 1:
+                for c in range(hane):
+                    ihtimal[r][c] = 0
+    GecmisIslem()
 
 
 def TahminYap():
@@ -166,9 +199,8 @@ def TahminYap():
             ind = random.randrange(0, len(rlist))
             s_tahmin = s_tahmin + str(rlist[ind])
         tahmin = int(s_tahmin)
-        if Benzersiz(tahmin):
-            if tahmin not in denenler:
-                return tahmin
+        if Benzersiz(tahmin) and tahmin not in tahminler[:, 0]:
+            return tahmin
 
 
 def SonucAl():
@@ -207,11 +239,10 @@ def OyunOyna():
         tahmin = TahminYap()
         print(str(tahmin))
         sonuc = SonucAl()
-        SonucIslem(tahmin, sonuc)
         if sonuc == kazanskor:
             print("TUTTUĞUN SAYIYI BİLDİM.")
         else:
-            denenler.append(tahmin)
+            SonucIslem(tahmin, sonuc)
 
 
 # ANA PROGRAM BURADAN BAŞLIYOR
@@ -222,5 +253,6 @@ while tekraroyna:
     OyunOyna()
     tekraroyna = DevamOnayiAl()
 print("Bizimle oynadığınız için teşekkür ederiz.")
-print(denenler)
+print(tahminler)
 # print(d_sayilar)
+print(ihtimal)
