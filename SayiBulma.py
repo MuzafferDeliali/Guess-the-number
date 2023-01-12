@@ -5,9 +5,7 @@ maxHane = 1000
 
 
 def SetMinMaxHane():
-    global hane
-    global minHane
-    global maxHane
+    global hane, minHane, maxHane
 
     minHane = 10 ** (hane - 1)
     maxHane = (minHane * 10) - 1
@@ -37,8 +35,7 @@ def HaneSayiAl():
 
 
 def RastgeleBenzersizSayi():  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
-    global minHane
-    global maxHane
+    global minHane, maxHane
 
     b = False
     r = 0
@@ -75,9 +72,7 @@ def Karsilastir(sayi1, sayi2):
 
 
 def TahminAl():
-    global hane
-    global minHane
-    global maxHane
+    global hane, minHane, maxHane
     while True:
         try:
             tahmin = int(input("Tahmin:"))

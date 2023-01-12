@@ -7,7 +7,6 @@ maxHane = 1000
 ihtimal = np.full((10, 3), 1, dtype=int)
 ihtimal[0][0] = 0
 tahminler = np.empty((1, 3), int)
-# d_sayilar = []  # +2-1 vb yanıtlarda eldeki sayılar ile deneyecek
 
 
 def ConvInt(val, d):
@@ -53,7 +52,6 @@ def HaneSayiAl():
 
 def RastgeleBenzersizSayi():  # Rakamları benzersiz rastgele 3 haneli tam sayı üretir.
     global minHane, maxHane
-
     b = False
     r = 0
     while not b:
@@ -103,6 +101,7 @@ def SonucDogrulama(sonuc):
     elif len(sonuc) == 4:
         if sonuc[0] != "+" or sonuc[2] != "-":
             return False
+
         d1 = ConvInt(sonuc[1], 0)
         if d1 < 1 or d1 >= hane:
             return False
@@ -201,7 +200,6 @@ def TahminYap():
 def SonucAl():
     while True:
         sonuc = str(input("Sonuç:"))
-
         dogrumu = SonucDogrulama(sonuc)
         if dogrumu:
             return sonuc
@@ -222,12 +220,9 @@ def DevamOnayiAl():
 
 def OyunOyna():
     global hane
-
     hane = HaneSayiAl()
     kazanskor = "+" + str(hane)
-
     print(str(hane) + " haneli bir sayı tut, Ben bilmeye çalışayım.")
-
     sonuc = ""
 
     while sonuc != kazanskor:
