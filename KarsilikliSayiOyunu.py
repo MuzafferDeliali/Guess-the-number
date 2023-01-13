@@ -1,7 +1,5 @@
 import random
 import numpy as np
-import colorama
-from colorama import Fore, Back, Style
 
 hane = 3
 minHane = 100
@@ -11,7 +9,7 @@ ihtimal = np.full((10, 3), 1, dtype=int)
 tahminler = np.empty((1, 3), int)
 
 
-def ConvInt(val, d): # String değeri int e çevirir. Çevrim başarısız olunca 2. parametreyi döndürür.
+def ConvInt(val, d):  # String değeri int e çevirir. Çevrim başarısız olunca 2. parametreyi döndürür.
     try:
         return int(val)
     except:
@@ -24,6 +22,7 @@ def ResetIhtimal():
         for c in range(3):
             ihtimal[r][c] = 1
     ihtimal[0][0] = 0
+
 
 def SetMinMaxHane():
     global hane
@@ -87,6 +86,7 @@ def Karsilastir(sayi1, sayi2):
             sonuc = sonuc + "-" + str(eksi)
 
         return sonuc
+
 
 def SonucDogrulama(sonuc):
     global hane
@@ -182,7 +182,7 @@ def SonucIslem(tahmin, sonuc):
     GecmisIslem()
 
 
-def TahminYap(): # Bilgisayar oyuncunun saysını tahmin ediyor
+def TahminYap():  # Bilgisayar oyuncunun saysını tahmin ediyor
     global ihtimal
     while True:
         s_tahmin = ""
@@ -210,7 +210,7 @@ def SonucAl():
             print("Girdiğiniz sonuç geçerli değil!")
 
 
-def TahminAl(): # Kullanıcıdan alınan tahmin
+def TahminAl():  # Kullanıcıdan alınan tahmin
     global hane
     global minHane
     global maxHane
@@ -227,7 +227,6 @@ def TahminAl(): # Kullanıcıdan alınan tahmin
             print(str(hane) + " haneli rakamları benzersiz bir tahminde bulunun!\n")
 
 
-
 def DevamOnayiAl():
     while True:
         cevap = input("Tekrar oynamak ister misiniz(E/H) ? ")
@@ -238,25 +237,26 @@ def DevamOnayiAl():
         else:
             print("Cevap anlaşılamadı. E veya H olarak cevaplayın.")
 
-def OyunOyna(): # Karşılıklı Oyun Oynama
+
+def OyunOyna():  # Karşılıklı Oyun Oynama \x1B[3mSAYI BULMA OYUNU BAŞLIYOR\x1B[23m
     global hane
     hane = HaneSayiAl()
     kazanskor = "+" + str(hane)
     SetMinMaxHane()
-    print("\nKarşılıklı olarak " + str(hane) + " haneli bir sayı tutalım ve birbirimizin sayısını bulmaya çalışalım.")
+    print("\n Karşılıklı olarak " + str(hane) + " haneli bir sayı tutalım ve birbirimizin sayısını bulmaya çalışalım.")
     print("Bakalım önce kim bilecek.\n")
-    sayi = RastgeleBenzersizSayi() # Bilgisayarın tuttuğu sayı
+    sayi = RastgeleBenzersizSayi()  # Bilgisayarın tuttuğu sayı
 
     sonucP = ""  # Kullanıcının tahminine karşılık Programın ürettiği sonuç
     sonucK = ""  # Programın tahminine karşılık Kullanıcının ürettiği sonuç
 
-    while sonucP != kazanskor and sonucK !=kazanskor:
+    while sonucP != kazanskor and sonucK != kazanskor:
         # Oyun A : Program sayı tutar kullanıcı bulmaya çalışır
         tahminK = TahminAl()
         sonucP = Karsilastir(tahminK, sayi)
         print("Bilgisayarın " + str(tahminK) + " tahminine verdiği yanıt " + sonucP)
         if sonucP == kazanskor:
-            print("TEBRİKLER BİLDİNİZ.") # Kullanıcı Kazandı
+            print("TEBRİKLER BİLDİNİZ.")  # Kullanıcı Kazandı
             break
 
         print("----------------------")
@@ -271,6 +271,7 @@ def OyunOyna(): # Karşılıklı Oyun Oynama
         else:
             SonucIslem(tahminP, sonucK)
 
+
 # ANA PROGRAM BURADAN BAŞLIYOR
 ihtimal[0][0] = 0
 print('\x1B[3mSAYI BULMA OYUNU BAŞLIYOR\x1B[23m')
@@ -280,4 +281,3 @@ while tekraroyna:
     OyunOyna()
     tekraroyna = DevamOnayiAl()
 print("Bizimle oynadığınız için teşekkür ederiz.")
-
