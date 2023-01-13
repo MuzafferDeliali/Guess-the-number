@@ -202,7 +202,7 @@ def TahminYap():  # Bilgisayar oyuncunun saysını tahmin ediyor
 def SonucAl():
     while True:
         sonuc = str(input("Oyuncunun bu tahmine verdiği yanıt:"))
-        print("----------------------")
+        print("--------------------------------------------")
         dogrumu = SonucDogrulama(sonuc)
         if dogrumu:
             return sonuc
@@ -243,7 +243,7 @@ def OyunOyna():  # Karşılıklı Oyun Oynama \x1B[3mSAYI BULMA OYUNU BAŞLIYOR\
     hane = HaneSayiAl()
     kazanskor = "+" + str(hane)
     SetMinMaxHane()
-    print("\n Karşılıklı olarak " + str(hane) + " haneli bir sayı tutalım ve birbirimizin sayısını bulmaya çalışalım.")
+    print("\nKarşılıklı olarak " + str(hane) + " haneli bir sayı tutalım ve birbirimizin sayısını bulmaya çalışalım.")
     print("Bakalım önce kim bilecek.\n")
     sayi = RastgeleBenzersizSayi()  # Bilgisayarın tuttuğu sayı
 
@@ -259,7 +259,7 @@ def OyunOyna():  # Karşılıklı Oyun Oynama \x1B[3mSAYI BULMA OYUNU BAŞLIYOR\
             print("TEBRİKLER BİLDİNİZ.")  # Kullanıcı Kazandı
             break
 
-        print("----------------------")
+        print("--------------------------------------------")
 
         # Oyun B : Kullanıcı sayı tutar program bulmaya çalışır
         tahminP = TahminYap()
@@ -274,7 +274,7 @@ def OyunOyna():  # Karşılıklı Oyun Oynama \x1B[3mSAYI BULMA OYUNU BAŞLIYOR\
 
 # ANA PROGRAM BURADAN BAŞLIYOR
 ihtimal[0][0] = 0
-print('\x1B[3mSAYI BULMA OYUNU BAŞLIYOR\x1B[23m')
+print('\x1B[3m\nSAYI BULMA OYUNU BAŞLIYOR\x1B[23m')
 tekraroyna = True
 while tekraroyna:
     ResetIhtimal()
