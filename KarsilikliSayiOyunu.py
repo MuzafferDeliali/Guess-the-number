@@ -159,6 +159,13 @@ def GecmisIslem():
                     if ihtimal[r][c] > 0:
                         ihtimal[:, c] = 0
                         ihtimal[r][c] = 2
+            elif sifir + tahminler[i][2] == hane:
+                s_tahmin = str(tahmin)
+                for c in range(len(s_tahmin)):
+                    r = int(s_tahmin[c])
+                    if ihtimal[r][c] > 0:
+                        ihtimal[:, c] = 0
+                        ihtimal[r][c] = 1
 
 
 def SonucIslem(tahmin, sonuc):
@@ -211,9 +218,7 @@ def SonucAl():
 
 
 def TahminAl():  # Kullanıcıdan alınan tahmin
-    global hane
-    global minHane
-    global maxHane
+    global hane, minHane, maxHane
     while True:
         try:
             tahmin = int(input("Oyuncunun Tahmini:"))
@@ -281,3 +286,4 @@ while tekraroyna:
     OyunOyna()
     tekraroyna = DevamOnayiAl()
 print("Bizimle oynadığınız için teşekkür ederiz.")
+print(ihtimal)
